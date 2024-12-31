@@ -4,7 +4,7 @@ import mqtt from "mqtt";
 import z from "zod";
 
 const app = new Hono();
-app.get(
+app.post(
   "/",
   zValidator(
     "json",
