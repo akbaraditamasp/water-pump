@@ -33,7 +33,7 @@ app.post(
       password: process.env.MQTT_PASS,
     });
 
-    mqttClient.publishAsync("pump", `${Math.floor(amount / 1000) * 5000}`);
+    mqttClient.publishAsync("pump", `${Math.floor(amount / 1000) * 10000}`);
 
     return c.json({
       message: "Success",
