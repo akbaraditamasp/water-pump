@@ -4,7 +4,7 @@ import mqtt from "mqtt";
 import z from "zod";
 
 const app = new Hono();
-app.post(
+app.get(
   "/",
   zValidator(
     "json",
@@ -26,11 +26,11 @@ app.post(
       return c.json({ error: "Unauthorized" }, 401);
 
     const mqttClient = await mqtt.connectAsync({
-      host: "103.172.204.65",
-      port: 1883,
+      host: process.env.MQTT_HOST,
+      port: Number(process.env.MQTT_PORT),
       connectTimeout: 60_000,
-      username: "akbar",
-      password: "11Agustus!",
+      username: process.env.MQTT_USER,
+      password: process.env.MQTT_PASS,
     });
 
     mqttClient.publishAsync("pump", `${Math.floor(amount / 1000) * 5000}`);
